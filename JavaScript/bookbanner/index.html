@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="前端开发,响应式,HTML5秘籍,跨境电商,二手,二手书,丰趣海淘,淘宝,图灵图书,图灵">
+    <meta name="description" content="图书HTML5秘籍 跨境电商,介绍、书评、论坛及推荐 ">
+    <title>二手书籍自营商店-个人自营，诚信经营、生活不易、多多支持！</title>
+    <link rel="shortcut icon" href="https://blog.dunizb.com/favicon.ico">
+    <title>生成图书分享图</title>
+    <style>
+        *{box-sizing: border-box;}
+        body{
+            /* background: #000; */
+            /* display: flex; */
+        }
+        .container{
+            max-width: 320px;
+            background:#fff;
+            overflow: hidden;
+            color: #000;
+            border-radius: 5px;
+            float: left;
+        }
+        .store-brand{
+            text-align: center;
+            padding: 5px 0;
+            font-weight: bold;
+            border-radius: 5px 5px 0 0;
+            background: #fff;
+        }
+        .store-brand img{
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+        .book-img{
+            /* width: 320px; */
+            text-align: center;
+            background: #fff;
+        }
+        .book-img img{
+            display: inline-block;
+            /* border: 1px solid red; */
+        }
+        .book-wrapper{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0 15px;
+            background: #fff;
+        }
+        .book-wrapper .book-price{
+            flex: 1;
+            font-size: 38px;
+            color: #f01400;
+            font-weight: bold;
+            margin-right: 3px;
+        }
+        .book-wrapper .book-price span{
+            font-size: 14px;
+        }
+        .book-wrapper .book-name{
+            display: flex;
+            flex-direction: column;
+            flex: 4;
+        }
+        .book-wrapper .book-name .name{
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .book-wrapper .book-name .star .tag{
+            display: inline-block;
+            padding: 0 5px;
+            font-size: 10px;
+            color: #fff;
+        }
+        .book-wrapper .book-name .star{
+            line-height: 17px;
+        }
+        .book-wrapper .book-name .star .tag.baoyou{
+            background-color: #f01400;
+        }
+        .book-wrapper .book-name .star .tag.isnew{
+            background-color:#3183f9;
+        }
+        .book-wrapper .book-name .star .tag.douban{
+            background-color:#5cb85c;
+        }
+        .book-desc{
+            font-size: 12px;
+            margin-bottom: 5px;
+            padding: 0 10px 10px 15px;
+            background: #fff;
+        }
+        .ercode{
+            display: flex;
+            align-items: center;
+            padding: 18px 20px 10px 16px;
+            border-top: 1px dashed #999;
+            position: relative;
+            background: #fff;
+        }
+        .ercode::after{
+            content: ' ';
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #000;
+            position: absolute;
+            top: -8px;
+            left: -8px;
+        }
+        .ercode::before{
+            content: ' ';
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #000;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+        }
+        .ercode .img{
+            flex: 3;
+            font-size: 12px;
+            color: #999;
+            display: flex;
+            align-items: center;
+        }
+        .ercode img{
+            width: 50px;
+            height: 50px;
+            float: left;
+            margin-right: 5px;
+        }
+        .ercode .url{
+            font-size: 12px;
+        }
+        #html2canvas{
+            width:320px;
+            float: left;
+        }
+        #html2canvas canvas{
+            width: 320px;
+            margin:0 auto;
+        }
+        #html2canvas img{
+            width: 320px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container" class="container">
+        <div class="store-brand">
+            <img src="head.gif" alt="">码农闲置物品交易商店
+        </div>
+        <div class="book-img">
+            <img src="book.jpg" alt="" style="width:90%;">
+        </div>
+        <div class="book-wrapper">
+            <div class="book-price">39<span>￥</span></div>
+            <div class="book-name">
+                <div class="name">前端工程化：体系设计与实践</div>
+                <div class="star">
+                    <span class="tag baoyou">全国包邮</span>
+                    <span class="tag isnew">几乎全新</span>
+                    <span class="tag douban">豆瓣7.1分</span>
+                </div>
+            </div>
+        </div>
+        <div class="book-desc">
+            前端工程化可以提升前端工程师的工作效率，本书全面、系统地介绍了前端工程体系各个环节的设计要点和实践经验，工程化方案实例基于Node.js、webpack、Yeoman、Express等
+        </div>
+        <div class="ercode">
+            <div class="img">
+                <img src="ercode.png" alt="">
+                长按识别二维码<br/>进入商店购买
+            </div>
+            <div class="url">store.dunizb.com</div>
+        </div>
+    </div>
+    
+    <div style="text-align:center;margin:0 10px;float:left;">
+        <button id="saveImg" onclick="saveToImage()">生成图片</button>
+    </div>
+    
+    <div id="html2canvas"></div>
+</body>
+<script src="static/html2canvas.js"></script>
+<script>
+  //定义查找元素方法
+  function get(id) {
+    return document.getElementById(id);
+  }
+  var canvasBox = get('html2canvas');
+  var imageUrl = '';
+  var main = {
+    //获取像素密度
+    getPixelRatio:function(context){
+      var backingStore = context.backingStorePixelRatio ||
+        context.webkitBackingStorePixelRatio ||
+        context.mozBackingStorePixelRatio ||
+        context.msBackingStorePixelRatio ||
+        context.oBackingStorePixelRatio ||
+        context.backingStorePixelRatio || 1;
+      return (window.devicePixelRatio || 1) / backingStore;
+    },
+    //绘制dom 元素，生成截图canvas
+    html2Canvas: function () {
+      var shareContent = get("container");// 需要绘制的部分的 (原生）dom 对象 ，注意容器的宽度不要使用百分比，使用固定宽度，避免缩放问题
+      var width = shareContent.offsetWidth;  // 获取(原生）dom 宽度
+      var height = shareContent.offsetHeight; // 获取(原生）dom 高
+      var offsetTop = shareContent.offsetTop;  //元素距离顶部的偏移量
+
+      var canvas = document.createElement('canvas');  //创建canvas 对象
+      var context = canvas.getContext('2d');
+      var scaleBy = main.getPixelRatio(context);  //获取像素密度的方法 (也可以采用自定义缩放比例)
+      canvas.width = width * scaleBy;   //这里 由于绘制的dom 为固定宽度，居中，所以没有偏移
+      canvas.height = (height * scaleBy) + offsetTop;  // 注意高度问题，由于顶部有个距离所以要加上顶部的距离，解决图像高度偏移问题
+      context.scale(scaleBy, scaleBy);
+
+      var opts = {
+        allowTaint:true,//允许加载跨域的图片
+        tainttest:false, //检测每张图片都已经加载完成
+        scale:scaleBy, // 添加的scale 参数
+        canvas:canvas, //自定义 canvas
+        logging: false, //日志开关，发布的时候记得改成false
+        width:width, //dom 原始宽度
+        height:height //dom 原始高度
+      };
+      html2canvas(shareContent, {
+        allowTaint: true,
+        width:width, //dom 原始宽度
+        height:height, //dom 原始高度
+        scale:scaleBy, // 添加的scale 参数
+        canvas:canvas, //自定义 canvas
+        taintTest: false,
+        onrendered: function(canvas) {
+          var image = new Image()
+          image.crossOrigin="anonymous"; //关键
+          imageUrl = canvas.toDataURL('image/png');
+          image.src = imageUrl;
+          image.onload = function () {
+            canvasBox.appendChild(image);
+          }
+        }
+      })
+    }
+  }
+
+  function saveToImage () {
+    main.html2Canvas();
+  }
+</script>  
+</html>
